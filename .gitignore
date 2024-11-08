@@ -1,6 +1,6 @@
 # Python
 __pycache__/
-test_*.pyc
+test_checkin.py
 
 # 环境变量
 .env

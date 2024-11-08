@@ -2,12 +2,13 @@ name: 自动签到
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天 UTC 0:00 运行 (北京时间 8:00)
+    - cron: '0 0 * * *'  # UTC 0:00 = 北京时间 8:00
   workflow_dispatch:      # 允许手动触发
 
 jobs:
   checkin:
     runs-on: ubuntu-latest
+    environment: FlyingBird Auto Checkin
     
     steps:
     - uses: actions/checkout@v3
@@ -28,4 +29,4 @@ jobs:
         FB_PASSWORD: ${{ secrets.FB_PASSWORD }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      run: python checkin.py 
+      run: python checkin.py
