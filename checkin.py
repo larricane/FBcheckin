@@ -2,7 +2,7 @@ import os
 import time
 import random
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 
 class siteCheckin:
@@ -24,7 +24,7 @@ class siteCheckin:
         
     def log(self, message):
         """使用北京时间记录日志"""
-        beijing_time = datetime.utcnow() + timedelta(hours=8)
+        beijing_time = datetime.now(timezone.utc) + timedelta(hours=8)
         print(f"[{beijing_time}] {message}")
         
     def notify(self, title, message, checkin_info=None):
@@ -37,7 +37,7 @@ class siteCheckin:
         if os.getenv('TELEGRAM_BOT_TOKEN') and os.getenv('TELEGRAM_CHAT_ID'):
             try:
                 # 调整为北京时间
-                beijing_time = datetime.utcnow() + timedelta(hours=8)
+                beijing_time = datetime.now(timezone.utc) + timedelta(hours=8)
                 current_time = beijing_time.strftime("%Y-%m-%d %H:%M:%S")
                 
                 text_message = (
